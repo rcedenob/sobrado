@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sobrado — El espacio que te sobra, el que te falta</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0B1629;
+  --navy-mid:#152238;
+  --navy-light:#1E3254;
+  --navy-muted:#2C4570;
+  --amber:#F5A623;
+  --amber-light:#FAC05E;
+  --amber-dark:#C67E0A;
+  --amber-pale:#FEF3DC;
+  --white:#FFFFFF;
+  --off-white:#F8F7F4;
+  --slate:#8FA3BF;
+  --slate-light:#C4D3E3;
+  --slate-pale:#EDF1F7;
+  --text-on-navy:rgba(255,255,255,0.55);
+  --r:14px;
+  --r-sm:8px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Instrument Sans',sans-serif;background:var(--off-white);color:var(--navy);overflow-x:hidden}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 56px;
+  background:rgba(11,22,41,0.96);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(245,166,35,0.12);
+}
+.logo{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:24px;
+  color:var(--white);letter-spacing:-0.5px;
+}
+.logo span{color:var(--amber)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{
+  text-decoration:none;color:var(--slate);
+  font-size:14px;font-weight:400;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--white)}
+.nav-pill{
+  background:var(--amber);color:var(--navy) !important;
+  padding:9px 20px;border-radius:100px;
+  font-weight:500 !important;font-size:14px !important;
+  transition:all .2s !important;
+}
+.nav-pill:hover{background:var(--amber-light) !important;transform:translateY(-1px)}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  background:var(--navy);
+  display:grid;grid-template-columns:1fr 1fr;
+  padding-top:76px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;
+  width:800px;height:800px;
+  background:radial-gradient(circle,rgba(245,166,35,0.08) 0%,transparent 65%);
+  top:-200px;right:-100px;pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(245,166,35,0.05) 0%,transparent 70%);
+  bottom:50px;left:100px;pointer-events:none;
+}
+
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:80px 52px 80px 72px;
+  position:relative;z-index:2;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1px solid rgba(245,166,35,0.3);
+  border-radius:100px;padding:6px 16px;
+  font-size:12px;font-weight:500;color:var(--amber-light);
+  width:fit-content;margin-bottom:36px;
+  animation:fadeUp .5s ease both;
+}
+.badge-dot{
+  width:6px;height:6px;background:var(--amber);
+  border-radius:50%;animation:blink 2s infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+h1{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(48px,5vw,76px);line-height:1.0;
+  letter-spacing:-2.5px;color:var(--white);
+  margin-bottom:28px;
+  animation:fadeUp .6s .08s ease both;
+}
+h1 em{font-style:italic;color:var(--amber);font-weight:700}
+h1 .line-dim{color:var(--slate-light)}
+
+.hero-sub{
+  font-size:17px;line-height:1.65;color:var(--slate);
+  max-width:420px;margin-bottom:48px;font-weight:300;
+  animation:fadeUp .6s .16s ease both;
+}
+
+.cta-row{
+  display:flex;gap:12px;flex-wrap:wrap;
+  animation:fadeUp .6s .24s ease both;
+}
+.btn-amber{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--amber);color:var(--navy);
+  text-decoration:none;padding:15px 28px;border-radius:100px;
+  font-size:15px;font-weight:500;
+  transition:all .25s;border:none;cursor:pointer;
+}
+.btn-amber:hover{background:var(--amber-light);transform:translateY(-2px);box-shadow:0 10px 28px rgba(245,166,35,0.3)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:var(--white);
+  text-decoration:none;padding:15px 28px;border-radius:100px;
+  font-size:15px;font-weight:400;
+  transition:all .25s;
+  border:1px solid rgba(255,255,255,0.18);
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.4);transform:translateY(-2px)}
+
+.hero-stats{
+  display:flex;gap:40px;margin-top:64px;
+  padding-top:40px;border-top:1px solid rgba(255,255,255,0.07);
+  animation:fadeUp .6s .32s ease both;
+}
+.stat-n{
+  font-family:'Syne',sans-serif;font-size:30px;
+  font-weight:800;color:var(--amber);line-height:1;
+}
+.stat-l{font-size:12px;color:var(--slate);margin-top:5px;line-height:1.4}
+
+/* Hero Right */
+.hero-right{
+  position:relative;display:flex;
+  align-items:center;justify-content:center;
+  padding:40px 48px 40px 20px;z-index:2;
+}
+.card-main{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;padding:28px;width:290px;
+  backdrop-filter:blur(8px);
+  animation:cardIn .7s .3s ease both;
+}
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.cm-img{
+  width:100%;height:150px;
+  background:linear-gradient(135deg,var(--navy-light),var(--navy-muted));
+  border-radius:12px;margin-bottom:18px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:52px;border:1px solid rgba(255,255,255,0.08);
+}
+.cm-loc{font-size:11px;color:var(--slate);margin-bottom:6px;letter-spacing:.5px;text-transform:uppercase}
+.cm-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--white);margin-bottom:4px}
+.cm-addr{font-size:12px;color:var(--slate);margin-bottom:18px}
+.cm-row{display:flex;align-items:center;justify-content:space-between}
+.cm-price{
+  font-family:'Syne',sans-serif;font-size:22px;
+  font-weight:800;color:var(--amber);
+}
+.cm-price span{font-size:12px;font-weight:400;color:var(--slate)}
+.cm-tag{
+  background:rgba(245,166,35,0.15);color:var(--amber-light);
+  font-size:11px;font-weight:500;padding:4px 10px;border-radius:100px;
+}
+
+.fc{
+  position:absolute;background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:14px;padding:14px 18px;
+  backdrop-filter:blur(10px);
+}
+.fc-save{bottom:130px;left:20px;animation:fl 3.5s ease-in-out infinite}
+.fc-rate{top:90px;right:30px;animation:fl 3.5s 1.2s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.fc-lbl{font-size:10px;color:var(--slate);margin-bottom:3px;letter-spacing:.5px;text-transform:uppercase}
+.fc-val{font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--white)}
+.fc-sub{font-size:10px;color:var(--slate);margin-top:2px}
+.stars-row{color:var(--amber);font-size:12px;letter-spacing:2px;margin-bottom:2px}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* LOGOS BAR */
+.logos-bar{
+  background:var(--navy-mid);
+  padding:28px 72px;
+  display:flex;align-items:center;gap:48px;
+  border-top:1px solid rgba(255,255,255,0.05);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.logos-bar-label{
+  font-size:11px;color:var(--slate);letter-spacing:1px;
+  text-transform:uppercase;white-space:nowrap;flex-shrink:0;
+}
+.logos-bar-items{
+  display:flex;gap:40px;align-items:center;flex-wrap:wrap;
+}
+.logo-item{
+  font-family:'Syne',sans-serif;font-size:14px;
+  font-weight:700;color:rgba(255,255,255,0.2);
+  letter-spacing:1px;text-transform:uppercase;
+}
+
+/* HOW */
+.how{
+  background:var(--off-white);
+  padding:110px 72px;
+}
+.section-chip{
+  display:inline-block;background:var(--amber-pale);
+  color:var(--amber-dark);font-size:11px;font-weight:500;
+  text-transform:uppercase;letter-spacing:1.5px;
+  padding:5px 14px;border-radius:100px;margin-bottom:20px;
+}
+.section-h{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(34px,3.5vw,52px);line-height:1.1;
+  letter-spacing:-1.5px;color:var(--navy);
+  margin-bottom:14px;
+}
+.section-p{
+  font-size:16px;line-height:1.65;color:#5A6B80;
+  max-width:460px;font-weight:300;margin-bottom:64px;
+}
+
+.tabs-row{display:flex;gap:8px;margin-bottom:48px}
+.tab{
+  padding:10px 22px;border-radius:100px;
+  font-size:14px;font-weight:500;cursor:pointer;
+  border:1.5px solid var(--slate-light);
+  color:#8FA3BF;background:transparent;
+  font-family:'Instrument Sans',sans-serif;
+  transition:all .2s;
+}
+.tab.on{background:var(--navy);border-color:var(--navy);color:white}
+.tab:hover:not(.on){border-color:var(--navy);color:var(--navy)}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.step{
+  background:white;border:1px solid var(--slate-pale);
+  border-radius:var(--r);padding:32px 28px;
+  transition:all .25s;position:relative;overflow:hidden;
+}
+.step::before{
+  content:'';position:absolute;top:0;left:0;right:0;
+  height:3px;background:linear-gradient(90deg,var(--amber),var(--amber-light));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .3s;
+}
+.step:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(11,22,41,0.1)}
+.step:hover::before{transform:scaleX(1)}
+.step-n{
+  font-family:'Syne',sans-serif;font-size:11px;font-weight:700;
+  color:var(--amber);letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:20px;
+}
+.step-ico{
+  font-size:32px;margin-bottom:18px;display:block;
+  line-height:1;
+}
+.step h3{
+  font-family:'Syne',sans-serif;font-size:19px;
+  font-weight:700;margin-bottom:10px;color:var(--navy);
+}
+.step p{font-size:13px;line-height:1.65;color:#6B7E94;font-weight:300}
+
+/* SPLIT */
+.split{display:grid;grid-template-columns:1fr 1fr;min-height:640px}
+.split-l{
+  background:var(--navy);
+  padding:96px 64px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.split-r{
+  background:var(--amber);
+  padding:96px 64px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.split-l .section-h{color:var(--white)}
+.split-l .section-p{color:var(--slate)}
+.split-r .section-chip{background:rgba(11,22,41,0.12);color:var(--navy)}
+.split-r .section-h{color:var(--navy)}
+.split-r .section-p{color:rgba(11,22,41,0.65);max-width:100%}
+
+.perks{list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:36px}
+.perks li{
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:14px;line-height:1.5;
+}
+.split-l .perks li{color:rgba(255,255,255,0.8)}
+.split-r .perks li{color:var(--navy)}
+.perk-check{
+  width:22px;height:22px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;flex-shrink:0;margin-top:1px;
+}
+.split-l .perk-check{background:rgba(245,166,35,0.2);color:var(--amber)}
+.split-r .perk-check{background:rgba(11,22,41,0.15);color:var(--navy)}
+
+.earn-card{
+  background:rgba(245,166,35,0.1);
+  border:1px solid rgba(245,166,35,0.25);
+  border-radius:var(--r);padding:24px;max-width:340px;
+  margin-top:32px;
+}
+.earn-lbl{font-size:12px;color:var(--slate);margin-bottom:6px}
+.earn-n{
+  font-family:'Syne',sans-serif;font-size:44px;
+  font-weight:800;color:var(--amber);line-height:1;
+}
+.earn-sub{font-size:12px;color:var(--slate);margin-top:6px}
+
+.compare-card{
+  background:rgba(11,22,41,0.08);
+  border:1px solid rgba(11,22,41,0.12);
+  border-radius:var(--r);padding:24px;max-width:340px;margin-top:32px;
+}
+.cmp-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 0;border-bottom:1px solid rgba(11,22,41,0.08);
+  font-size:13px;
+}
+.cmp-row:last-child{border-bottom:none}
+.cmp-lbl{color:rgba(11,22,41,0.6)}
+.cmp-bad{color:rgba(11,22,41,0.3);text-decoration:line-through;font-weight:500}
+.cmp-good{color:var(--navy);font-weight:500}
+.cmp-save{
+  font-family:'Syne',sans-serif;font-size:20px;
+  font-weight:800;color:var(--navy);
+}
+
+/* PROOF */
+.proof{
+  padding:110px 72px;background:white;
+}
+.proof-header{text-align:center;margin-bottom:60px}
+.proof-header .section-h{color:var(--navy)}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tcard{
+  background:var(--off-white);border-radius:var(--r);
+  padding:28px;border:1px solid var(--slate-pale);
+  position:relative;
+}
+.tcard-q{
+  font-family:'Syne',sans-serif;
+  font-size:48px;font-weight:800;
+  color:var(--slate-light);position:absolute;
+  top:16px;right:22px;line-height:1;
+}
+.tcard-text{
+  font-size:14px;line-height:1.7;color:#5A6B80;
+  margin-bottom:22px;font-weight:300;
+  position:relative;z-index:1;
+}
+.tcard-author{display:flex;align-items:center;gap:12px}
+.tcard-av{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+  flex-shrink:0;
+}
+.tcard-name{font-size:13px;font-weight:500;color:var(--navy)}
+.tcard-role{font-size:11px;color:var(--slate);margin-top:2px}
+
+/* FAQ */
+.faq{
+  display:grid;grid-template-columns:1fr 1.5fr;
+  gap:80px;padding:100px 72px;
+  background:var(--navy);
+}
+.faq-l .section-h{color:var(--white)}
+.faq-l .section-p{color:var(--slate);font-size:15px;line-height:1.7;margin-bottom:0;margin-top:16px}
+.faq-items{display:flex;flex-direction:column;gap:10px}
+.faq-item{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:var(--r-sm);overflow:hidden;
+  transition:background .2s;
+}
+.faq-item:hover{background:rgba(255,255,255,0.06)}
+.faq-q{
+  padding:18px 22px;font-size:14px;font-weight:500;
+  color:rgba(255,255,255,0.85);cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:16px;
+}
+.faq-icon{
+  width:26px;height:26px;border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:var(--amber);flex-shrink:0;
+  transition:transform .2s,background .2s;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--amber);color:var(--navy)}
+.faq-a{
+  display:none;padding:0 22px 18px;
+  font-size:13px;line-height:1.7;color:var(--slate);font-weight:300;
+}
+.faq-item.open .faq-a{display:block}
+.faq-item.open{background:rgba(255,255,255,0.06)}
+
+/* CTA FINAL */
+.cta-final{
+  background:var(--amber);
+  padding:120px 72px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-final::before{
+  content:'SOBRADO';
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:200px;color:rgba(11,22,41,0.05);
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  white-space:nowrap;pointer-events:none;
+  letter-spacing:-8px;
+}
+.cta-final .section-h{color:var(--navy);font-size:clamp(40px,5vw,68px)}
+.cta-final .section-p{color:rgba(11,22,41,0.6);margin:0 auto 48px;max-width:480px}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-navy{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--navy);color:white;
+  text-decoration:none;padding:16px 32px;border-radius:100px;
+  font-size:16px;font-weight:500;
+  transition:all .25s;
+}
+.btn-navy:hover{background:var(--navy-mid);transform:translateY(-2px);box-shadow:0 10px 28px rgba(11,22,41,0.3)}
+.btn-outline-navy{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;color:var(--navy);
+  text-decoration:none;padding:16px 32px;border-radius:100px;
+  font-size:16px;font-weight:500;
+  border:2px solid rgba(11,22,41,0.25);
+  transition:all .25s;
+}
+.btn-outline-navy:hover{border-color:var(--navy);transform:translateY(-2px)}
+
+/* FOOTER */
+footer{
+  background:var(--navy);padding:36px 72px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.footer-links{display:flex;gap:24px;list-style:none}
+.footer-links a{
+  text-decoration:none;color:rgba(255,255,255,0.25);
+  font-size:12px;transition:color .2s;
+}
+.footer-links a:hover{color:rgba(255,255,255,0.6)}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.2)}
+
+/* SCROLL REVEAL */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:14px 20px}
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:36px 24px 56px}
+  .how{padding:72px 24px}
+  .steps{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  .split-l,.split-r{padding:60px 24px}
+  .proof{padding:72px 24px}
+  .proof-grid{grid-template-columns:1fr}
+  .faq{grid-template-columns:1fr;padding:60px 24px;gap:40px}
+  .cta-final{padding:80px 24px}
+  footer{padding:28px 24px;flex-direction:column;gap:16px;text-align:center}
+  .logos-bar{padding:24px;gap:24px;flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">So<span>brado</span></div>
+  <ul class="nav-links">
+    <li><a href="#como-funciona">Cómo funciona</a></li>
+    <li><a href="#anfitriones">Anfitriones</a></li>
+    <li><a href="#inquilinos">Inquilinos</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#empezar" class="nav-pill">Publicar espacio</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="badge"><span class="badge-dot"></span>Beta gratuita · Toda España</div>
+    <h1>El espacio<br/>que te <em>sobra</em><br/><span class="line-dim">al que le falta</span></h1>
+    <p class="hero-sub">Alquila tu trastero, garaje o altillo a quien lo necesita. O encuentra almacenaje real cerca de ti, hasta un 50% más barato.</p>
+    <div class="cta-row">
+      <a href="#empezar" class="btn-amber">📦 Alquila tu espacio</a>
+      <a href="#buscar" class="btn-ghost">🔍 Buscar espacio</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-n">€55</div>
+        <div class="stat-l">Ingreso medio<br/>mensual</div>
+      </div>
+      <div>
+        <div class="stat-n">−50%</div>
+        <div class="stat-l">Vs. empresas<br/>de trasteros</div>
+      </div>
+      <div>
+        <div class="stat-n">10 min</div>
+        <div class="stat-l">Para publicar<br/>tu espacio</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="card-main">
+      <div class="cm-loc">📍 Disponible ahora</div>
+      <div class="cm-img">🏠</div>
+      <div class="cm-title">Trastero en Chamberí</div>
+      <div class="cm-addr">Madrid · 6 m² · Planta baja</div>
+      <div class="cm-row">
+        <div class="cm-price">€48 <span>/ mes</span></div>
+        <div class="cm-tag">✓ Disponible</div>
+      </div>
+    </div>
+    <div class="fc fc-save">
+      <div class="fc-lbl">Ahorro vs Bluespace</div>
+      <div class="fc-val">−€46/mes</div>
+      <div class="fc-sub">Mismo barrio · mismo tamaño</div>
+    </div>
+    <div class="fc fc-rate">
+      <div class="stars-row">★★★★★</div>
+      <div class="fc-val">4.9 / 5</div>
+      <div class="fc-sub">Valoración media</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<div class="logos-bar">
+  <span class="logos-bar-label">Ideal para</span>
+  <div class="logos-bar-items">
+    <span class="logo-item">Mudanzas</span>
+    <span class="logo-item">Reformas</span>
+    <span class="logo-item">eCommerce</span>
+    <span class="logo-item">Estudiantes</span>
+    <span class="logo-item">Autónomos</span>
+    <span class="logo-item">Temporadas</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how rv" id="como-funciona">
+  <div class="section-chip">Proceso</div>
+  <h2 class="section-h">Así de sencillo</h2>
+  <p class="section-p">Sin contratos complicados ni intermediarios opacos. Solo vecinos que se ayudan mutuamente.</p>
+
+  <div class="tabs-row">
+    <button class="tab on" onclick="swTab(this,'host')">Soy anfitrión</button>
+    <button class="tab" onclick="swTab(this,'renter')">Busco espacio</button>
+  </div>
+
+  <div class="steps" id="st-host">
+    <div class="step">
+      <div class="step-n">Paso 01</div>
+      <span class="step-ico">📸</span>
+      <h3>Publica gratis</h3>
+      <p>Sube fotos, indica el tamaño y pon tu precio. Sin cuotas de alta ni comisiones iniciales.</p>
+    </div>
+    <div class="step">
+      <div class="step-n">Paso 02</div>
+      <span class="step-ico">🤝</span>
+      <h3>Elige a tu inquilino</h3>
+      <p>Te conectamos con personas verificadas cerca de ti. Tú decides quién entra en tu espacio.</p>
+    </div>
+    <div class="step">
+      <div class="step-n">Paso 03</div>
+      <span class="step-ico">💳</span>
+      <h3>Cobra cada mes</h3>
+      <p>Pago automático el día 5 de cada mes. Directo a tu cuenta, sin gestiones.</p>
+    </div>
+  </div>
+
+  <div class="steps" id="st-renter" style="display:none">
+    <div class="step">
+      <div class="step-n">Paso 01</div>
+      <span class="step-ico">🗺️</span>
+      <h3>Busca cerca</h3>
+      <p>Filtra por ciudad, tamaño y precio. Disponibilidad en tiempo real en tu barrio.</p>
+    </div>
+    <div class="step">
+      <div class="step-n">Paso 02</div>
+      <span class="step-ico">📝</span>
+      <h3>Contrato digital</h3>
+      <p>Firma electrónica incluida. Contrato legal generado automáticamente. Acceso desde el primer día.</p>
+    </div>
+    <div class="step">
+      <div class="step-n">Paso 03</div>
+      <span class="step-ico">📦</span>
+      <h3>Guarda y olvídate</h3>
+      <p>Accede cuando quieras. Cancela con 15 días de preaviso, sin penalización.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT -->
+<section class="split">
+  <div class="split-l rv" id="anfitriones">
+    <div class="section-chip" style="background:rgba(245,166,35,0.15);color:var(--amber-light)">Para anfitriones</div>
+    <h2 class="section-h">Tu sobrado<br/>trabaja solo</h2>
+    <p class="section-p">Convierte metros cuadrados sin uso en ingresos pasivos mensuales.</p>
+    <ul class="perks">
+      <li><span class="perk-check">✓</span><span>Publicación gratuita — pagas solo cuando alquilas</span></li>
+      <li><span class="perk-check">✓</span><span>Inquilinos verificados con DNI y historial de valoraciones</span></li>
+      <li><span class="perk-check">✓</span><span>Contrato digital generado automáticamente por Sobrado</span></li>
+      <li><span class="perk-check">✓</span><span>Seguro básico incluido hasta €3.000 en bienes almacenados</span></li>
+      <li><span class="perk-check">✓</span><span>Tú fijas el precio y decides a quién aceptas</span></li>
+    </ul>
+    <div class="earn-card">
+      <div class="earn-lbl">Estimación mensual · trastero 5m² · ciudad media</div>
+      <div class="earn-n">€55</div>
+      <div class="earn-sub">→ €660/año de ingresos pasivos sin hacer nada</div>
+    </div>
+    <br/><br/>
+    <a href="#empezar" class="btn-amber">Publicar mi espacio gratis →</a>
+  </div>
+
+  <div class="split-r rv" id="inquilinos">
+    <div class="section-chip">Para inquilinos</div>
+    <h2 class="section-h">Precio real,<br/>sin sorpresas</h2>
+    <p class="section-p">Almacenaje seguro a 10 minutos de casa, sin contratos rígidos ni precios de empresa.</p>
+    <ul class="perks">
+      <li><span class="perk-check">✓</span><span>Hasta un 50% más barato que Bluespace o Shurgard</span></li>
+      <li><span class="perk-check">✓</span><span>Siempre a menos de 10 minutos de tu domicilio</span></li>
+      <li><span class="perk-check">✓</span><span>Sin permanencia — cancela con 15 días de aviso</span></li>
+      <li><span class="perk-check">✓</span><span>Anfitriones verificados y valorados por la comunidad</span></li>
+      <li><span class="perk-check">✓</span><span>Acceso flexible pactado directamente con el anfitrión</span></li>
+    </ul>
+    <div class="compare-card">
+      <div class="cmp-row"><span class="cmp-lbl">Bluespace 5m² · Madrid</span><span class="cmp-bad">€98/mes</span></div>
+      <div class="cmp-row"><span class="cmp-lbl">Sobrado 5m² · mismo barrio</span><span class="cmp-good">€52/mes</span></div>
+      <div class="cmp-row"><span class="cmp-lbl">Tu ahorro anual</span><span class="cmp-save">€552</span></div>
+    </div>
+    <br/><br/>
+    <a href="#buscar" class="btn-navy">Buscar espacio cerca →</a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="proof rv">
+  <div class="proof-header">
+    <div class="section-chip">Comunidad</div>
+    <h2 class="section-h">Lo que dicen<br/>nuestros primeros usuarios</h2>
+  </div>
+  <div class="proof-grid">
+    <div class="tcard">
+      <div class="tcard-q">"</div>
+      <p class="tcard-text">Tenía el trastero de mis suegros vacío desde hace dos años. Con Sobrado lo alquilamos en cuatro días por €60 al mes. Es dinero que literalmente estaba tirado.</p>
+      <div class="tcard-author">
+        <div class="tcard-av" style="background:#FEF3DC">👩</div>
+        <div><div class="tcard-name">Carmen R.</div><div class="tcard-role">Anfitriona · Sevilla</div></div>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-q">"</div>
+      <p class="tcard-text">Me mudé a un piso más pequeño y Bluespace me pedía €180/mes. En Sobrado encontré un garaje a cinco minutos de casa por €72. La diferencia es brutal.</p>
+      <div class="tcard-author">
+        <div class="tcard-av" style="background:#E6F1FB">👨</div>
+        <div><div class="tcard-name">Marcos L.</div><div class="tcard-role">Inquilino · Barcelona</div></div>
+      </div>
+    </div>
+    <div class="tcard">
+      <div class="tcard-q">"</div>
+      <p class="tcard-text">Tengo un pequeño ecommerce y necesitaba almacenar stock de temporada. Encontré un bajo perfecto con acceso diario a un precio que ninguna empresa me hubiera dado.</p>
+      <div class="tcard-author">
+        <div class="tcard-av" style="background:#E8F4E8">👩‍💼</div>
+        <div><div class="tcard-name">Laura T.</div><div class="tcard-role">Inquilina · Valencia</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="faq-l rv">
+    <div class="section-chip" style="background:rgba(245,166,35,0.15);color:var(--amber-light)">Preguntas</div>
+    <h2 class="section-h">Resolvemos<br/>tus dudas</h2>
+    <p class="section-p">¿Algo más? Escríbenos en el chat o a hola@sobrado.es y respondemos en menos de 24h.</p>
+  </div>
+  <div class="faq-items rv">
+    <div class="faq-item" onclick="togFaq(this)">
+      <div class="faq-q">¿Es seguro dejar mis cosas en casa de un particular?<span class="faq-icon">+</span></div>
+      <div class="faq-a">Todos los anfitriones están verificados con DNI y tienen historial de valoraciones visibles. Además incluimos un seguro básico de hasta €3.000 para bienes almacenados en cualquier espacio de Sobrado.</div>
+    </div>
+    <div class="faq-item" onclick="togFaq(this)">
+      <div class="faq-q">¿Cuánto cobra Sobrado?<span class="faq-icon">+</span></div>
+      <div class="faq-a">Publicar es completamente gratis. Cobramos una comisión del 15% al anfitrión sobre cada mensualidad. Para el inquilino el precio que ves es el precio final, sin comisiones adicionales.</div>
+    </div>
+    <div class="faq-item" onclick="togFaq(this)">
+      <div class="faq-q">¿Qué espacios puedo publicar?<span class="faq-icon">+</span></div>
+      <div class="faq-a">Trasteros, garajes, plazas de parking, sótanos, bajos comerciales, altillos, habitaciones vacías o cualquier espacio seguro para almacenaje. Mínimo 1 m².</div>
+    </div>
+    <div class="faq-item" onclick="togFaq(this)">
+      <div class="faq-q">¿Cómo funciona el contrato?<span class="faq-icon">+</span></div>
+      <div class="faq-a">Generamos automáticamente un contrato de arrendamiento de uso distinto a vivienda, adaptado al derecho español. Ambas partes lo firman digitalmente. Es legalmente válido y vinculante.</div>
+    </div>
+    <div class="faq-item" onclick="togFaq(this)">
+      <div class="faq-q">¿Puedo cancelar cuando quiera?<span class="faq-icon">+</span></div>
+      <div class="faq-a">Sí. Tanto anfitrión como inquilino pueden cancelar con 15 días de preaviso sin penalización de ningún tipo. La flexibilidad es uno de los pilares de Sobrado.</div>
+    </div>
+    <div class="faq-item" onclick="togFaq(this)">
+      <div class="faq-q">¿Cuándo cobro como anfitrión?<span class="faq-icon">+</span></div>
+      <div class="faq-a">El pago se procesa entre los días 1 y 5 de cada mes. Recibes el importe menos la comisión directamente en tu cuenta bancaria antes del día 10.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="empezar">
+  <div class="rv">
+    <div class="section-chip" style="background:rgba(11,22,41,0.1);color:var(--navy)">Empieza hoy</div>
+    <h2 class="section-h">Tu espacio<br/>te está esperando</h2>
+    <p class="section-p">Únete a los primeros usuarios de Sobrado. Publicación gratuita durante la beta.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-navy">📦 Publicar mi espacio</a>
+      <a href="#" class="btn-outline-navy">🔍 Buscar almacenaje cerca</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo" style="color:white">So<span style="color:var(--amber)">brado</span></div>
+  <ul class="footer-links">
+    <li><a href="#">Cómo funciona</a></li>
+    <li><a href="#">Anfitriones</a></li>
+    <li><a href="#">Inquilinos</a></li>
+    <li><a href="#">Privacidad</a></li>
+    <li><a href="#">Términos</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Sobrado · Hecho en España 🇪🇸</div>
+</footer>
+
+<script>
+const rvEls = document.querySelectorAll('.rv');
+new IntersectionObserver((entries) => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting) setTimeout(()=>e.target.classList.add('in'), i*70);
+  });
+},{threshold:0.1}).observe.bind(null);
+rvEls.forEach(el => {
+  new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+  },{threshold:0.1}).observe(el);
+});
+
+function swTab(btn, type){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('st-host').style.display = type==='host'?'grid':'none';
+  document.getElementById('st-renter').style.display = type==='renter'?'grid':'none';
+}
+
+function togFaq(item){
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
